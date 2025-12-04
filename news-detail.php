@@ -37,8 +37,9 @@ mysqli_stmt_execute($update_stmt);
 $date = date('F j, Y', strtotime($news['publication_date']));
 
 
-$imagePath = '../admin/uploads/news/' . basename($news['featured_image']);
-$defaultImage = 'https://via.placeholder.com/900x450/4169e1/ffffff?text=Amfus+News';
+$defaultImage = './IMAGES/sch.jpg';
+
+$imagePath = './admin/uploads/news/' . basename($news['featured_image']);
 
 if (!empty($news['featured_image']) && file_exists($imagePath)) {
     $displayImage = $imagePath;
