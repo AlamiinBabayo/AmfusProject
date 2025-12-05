@@ -1408,8 +1408,8 @@ body{font-family:system-ui,Arial,Helvetica,sans-serif;color:var(--text);}
       <h3>Contact Information</h3>
       <p><strong>Address:</strong><br>
        Amfus Comprehensive Model School<br>No. 1491/1492 Na’ibawa Gabas<br>Off Dan Hassan Road, Zaria Road, Kano, Nigeria</p>
-      <p><strong>Phone:</strong> 0909 999 0256</p>
-      <p><strong>Email:</strong> info@ACMS-school.edu.ng</p>
+      <p><strong>Phone:</strong> +234 80 32834234</p>
+      <p><strong>Email:</strong> amfuscomprehensive@gmail.com</p>
     </div>
 
     <!-- Quick Links -->
