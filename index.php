@@ -1259,18 +1259,14 @@ lightbox.addEventListener('click', e => {
 <!-- Footer Section -->
 <footer class="footer">
   <div class="footer-container">
-    <!-- Contact Information -->
     <div class="footer-col">
       <h3>Contact Information</h3>
       <p><strong>Address:</strong><br>
-        20 Yandutse Road<br>
-        Kano, Kano State<br>
-        Nigeria</p>
+       Amfus Comprehensive Model School<br>No. 1491/1492 Na'ibawa Gabas<br>Off Dan Hassan Road, Zaria Road, Kano, Nigeria</p>
       <p><strong>Phone:</strong> 0909 999 0256</p>
       <p><strong>Email:</strong> info@ACMS-school.edu.ng</p>
     </div>
 
-    <!-- Quick Links -->
     <div class="footer-col">
       <h3>Quick Links</h3>
       <ul>
@@ -1282,7 +1278,6 @@ lightbox.addEventListener('click', e => {
       </ul>
     </div>
 
-    <!-- School Hours -->
     <div class="footer-col">
       <h3>School Hours</h3>
       <p><strong>Monday - Friday:</strong><br>7:30 AM – 2:00 PM</p>
@@ -1291,22 +1286,20 @@ lightbox.addEventListener('click', e => {
       <p><strong>Office Hours:</strong><br>8:00 AM – 4:00 PM (Mon-Fri)</p>
     </div>
 
-    <!-- Student Resources -->
     <div class="footer-col">
       <h3>Student Resources</h3>
       <ul>
-        <li><a href="#">Library Access</a></li>
-        <li><a href="#">Exam Results</a></li>
-        <li><a href="#">Student Portal</a></li>
-        <li><a href="#">E-Learning</a></li>
-        <li><a href="#">Support Services</a></li>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="about.php">About Us</a></li>
+        <li><a href="gallery.php">Photo Gallery</a></li>
+        <li><a href="news.php">School news</a></li>
+        <li><a href="contact.php">Contact Us</a></li>
       </ul>
     </div>
   </div>
 
   <hr>
 
-  <!-- Bottom Footer -->
   <div class="footer-bottom">
     <p>© 2025 Amfus Comprehensive School. All rights reserved. | Quality Education for Future Leaders</p>
   <a href="https://github.com/AlamiinBabayo">  <p class="designer">Designed by <strong>Al-Amin Babayo </p></a>
