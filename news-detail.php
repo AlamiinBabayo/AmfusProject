@@ -519,7 +519,7 @@ hr {
 <header class="main-header" style="font-style: italic; font-weight: bold;">
   <nav class="navbar">
     <div class="logo">
-      <img src="/IMAGES/logo.jpg" alt="Amfus Logo">
+      <img src="/ACMS_PROJECT/IMAGES/logo.png" alt="Amfus Logo">
       <span class="school-name">Amfus School</span>
     </div>
 
