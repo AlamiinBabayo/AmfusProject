@@ -271,10 +271,20 @@ if (!$result) {
   }
 
   /* Small screens */
-  @media (max-width:420px){
-    .school-name{ display:none }
-    .nav-links a, .nav-links button.dropdown-toggle{ font-size:15px }
-  }
+@media (max-width:420px){
+    .school-name{
+        display: block;     /* Make sure it's visible */
+        font-size: 20px;    /* Reduce size so it fits */
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .nav-links a,
+    .nav-links button.dropdown-toggle {
+        font-size: 15px;
+    }
+}
+
 
   /* ===== ABOUT SECTION ===== */
 .about {

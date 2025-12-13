@@ -152,10 +152,18 @@ body{font-family:system-ui,Arial,Helvetica,sans-serif;color:var(--text);backgrou
 }
 
 @media (max-width:420px){
-  .school-name{ display:none }
-  .nav-links a, .nav-links button.dropdown-toggle{ font-size:15px }
-}
+    .school-name{
+        display: block;     /* Make sure it's visible */
+        font-size: 20px;    /* Reduce size so it fits */
+        text-align: center;
+        white-space: nowrap;
+    }
 
+    .nav-links a,
+    .nav-links button.dropdown-toggle {
+        font-size: 15px;
+    }
+}
 /* ===== PAGE HEADER ===== */
 .page-header {
     position: relative;

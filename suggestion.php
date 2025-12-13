@@ -175,10 +175,19 @@ if (isset($_POST['suggestion_submit'])) {
     .mobile-actions .btn{ flex:1; justify-content:center }
   }
 
-  @media (max-width:420px){
-    .school-name{ display:none }
-    .nav-links a, .nav-links button.dropdown-toggle{ font-size:15px }
-  }
+@media (max-width:420px){
+    .school-name{
+        display: block;     /* Make sure it's visible */
+        font-size: 20px;    /* Reduce size so it fits */
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .nav-links a,
+    .nav-links button.dropdown-toggle {
+        font-size: 15px;
+    }
+}
 
   /* ===== PAGE HEADER (HERO) ===== */
   .page-header {

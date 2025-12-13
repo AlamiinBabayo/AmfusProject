@@ -188,7 +188,17 @@ body {
 }
 
 @media (max-width:420px){
-  .school-name{ display:none }
+    .school-name{
+        display: block;     /* Make sure it's visible */
+        font-size: 20px;    /* Reduce size so it fits */
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .nav-links a,
+    .nav-links button.dropdown-toggle {
+        font-size: 15px;
+    }
 }
 
 /* ===== Hero Banner ===== */
