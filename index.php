@@ -1,7 +1,7 @@
 <?php
-
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 include('./includes/connect.php');
-
 
 $sql = "SELECT id, full_name, position, profile_photo, facebook_url, twitter_url, linkedin_url 
         FROM team_members 
@@ -9,7 +9,6 @@ $sql = "SELECT id, full_name, position, profile_photo, facebook_url, twitter_url
         ORDER BY created_at DESC";
 
 $result = mysqli_query($con, $sql);
-
 
 if (!$result) {
     die("Database query failed: " . mysqli_error($con));
@@ -240,6 +239,38 @@ if (!$result) {
     transform:translateY(-2px);
   }
 
+  /* ====== NEW: Make action-buttons hold Login dropdown + Apply button nicely ====== */
+  .action-buttons{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .action-buttons .dropdown{
+    position: relative;
+  }
+  .action-buttons button.dropdown-toggle{
+    text-decoration:none;
+    color:var(--text);
+    font-weight:600;
+    font-size:16px;
+    background:none;
+    border:0;
+    cursor:pointer;
+    padding:8px 10px;
+    border-radius:8px;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .action-buttons button.dropdown-toggle:hover{
+    color:var(--highlight);
+  }
+  .action-buttons .dropdown-menu{
+    left:auto;
+    right:0;
+    min-width:210px;
+  }
+
   /* Hamburger (mobile) */
   .menu-toggle{display:none;background:none;border:0;font-size:26px;cursor:pointer}
 
@@ -284,7 +315,6 @@ if (!$result) {
         font-size: 15px;
     }
 }
-
 
   /* ===== ABOUT SECTION ===== */
 .about {
@@ -633,7 +663,7 @@ if (!$result) {
       -webkit-backdrop-filter: blur(14px);
       border: 1px solid rgba(255, 255, 255, 0.15);
       transition: transform 0.4s ease, box-shadow 0.4s ease, border 0.4s;
-      width: 260px; /* ✅ fixed width always */
+      width: 260px; /* âœ… fixed width always */
       box-sizing: border-box;
       justify-self: center;
     }
@@ -914,9 +944,6 @@ hr {
   }
 }
 
-
-
-
 /* ===== GALLERY ===== */
 @keyframes galleryFlip {
   0% {opacity:0; transform: scale(0.6) rotate(-8deg);}
@@ -957,7 +984,159 @@ hr {
   border-right: 2px solid #fff;
   animation: typewriter 4s steps(40, end) 1s forwards;
 }
+/* ================= LOGIN BUTTON ================= */
 
+.login-dropdown{
+  position:relative;
+}
+
+/* Real blue button */
+.login-btn{
+  background:#4169e1;
+  color:#fff;
+  border:none;
+  padding:10px 18px;
+  border-radius:8px;
+  font-weight:600;
+  font-size:15px;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  transition:0.3s ease;
+}
+
+.login-btn:hover{
+  background:#365dcf;
+  transform:translateY(-2px);
+}
+
+/* Dropdown menu */
+.login-menu{
+  position:absolute;
+  top:110%;
+  right:0;
+  min-width:200px;
+  background:#fff;
+  border-radius:10px;
+  box-shadow:0 12px 25px rgba(0,0,0,0.15);
+  padding:8px 0;
+  list-style:none;
+  display:none;
+  z-index:2000;
+}
+
+.login-menu li{
+  list-style:none;
+}
+
+.login-menu a{
+  display:block;
+  padding:12px 18px;
+  font-size:15px;
+  color:#333;
+  text-decoration:none;
+}
+
+.login-menu a:hover{
+  background:#f5f5f5;
+}
+
+/* Desktop hover */
+@media (min-width:921px){
+  .login-dropdown:hover .login-menu{
+    display:block;
+  }
+}
+
+/* Mobile click */
+.login-dropdown.open .login-menu{
+  display:block;
+}
+/* Hide mobile login on desktop */
+.mobile-login{
+  display:none;
+}
+
+/* Show mobile login only on small screens */
+@media (max-width:920px){
+  .mobile-login{
+    display:block;
+  }
+}
+/* ===== FORCE LOGIN TO LOOK LIKE BLUE BUTTON ===== */
+
+.action-buttons .dropdown > .dropdown-toggle{
+  background: #4169e1 !important;
+  color: #fff !important;
+  padding: 10px 18px !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+}
+
+/* Hover effect */
+.action-buttons .dropdown > .dropdown-toggle:hover{
+  background: #365dcf !important;
+  color: #fff !important;
+}
+
+/* Keep arrow white */
+.action-buttons .dropdown > .dropdown-toggle .arrow{
+  color: #fff !important;
+}
+
+/* ================= MOBILE LOGIN LIKE OTHER PAGES ================= */
+@media (min-width:921px){
+  .mobile-login-wrap{ display:none; }
+}
+
+@media (max-width:920px){
+
+  .mobile-login-wrap{
+    padding:10px 18px 6px;
+    width:100%;
+    display:block;
+  }
+
+  .mobile-login-wrap .login-btn{
+    width:100%;
+    justify-content:center;
+    background:var(--jobs);
+    color:#fff;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+
+  .mobile-login-wrap .login-menu{
+    position:static;
+    width:100%;
+    margin-top:10px;
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0 8px 18px rgba(0,0,0,0.10);
+    padding:8px 0;
+    list-style:none;
+    display:none;
+  }
+
+  .mobile-login-wrap .login-menu a{
+    display:block;
+    padding:12px 18px;
+    font-size:15px;
+    color:#333;
+    text-decoration:none;
+  }
+
+  .mobile-login-wrap .login-menu a:hover{ background:#f5f5f5; }
+  .mobile-login-wrap .login-dropdown.open .login-menu{ display:block; }
+}
 </style>
 </head>
 <body>
@@ -966,7 +1145,7 @@ hr {
   <nav class="navbar">
     <!-- Logo -->
     <div class="logo">
-      <img src="/ACMS_PROJECT/IMAGES/logo.png" alt="Amfus Logo">
+      <img src="/IMAGES/logo.png" alt="Amfus Logo">
       <span class="school-name">Amfus School</span>
     </div>
 
@@ -975,7 +1154,7 @@ hr {
       <li><a href="index.php" class="active">Home</a></li>
 
       <li class="dropdown">
-        <button class="dropdown-toggle"style="font-style: italic; font-weight: bold;">About Us <span class="arrow">▾</span></button>
+        <button class="dropdown-toggle" style="font-style: italic; font-weight: bold;">About Us <span class="arrow">▾</span></button>
         <ul class="dropdown-menu">
           <li><a href="about.php">Overview</a></li>
           <li><a href="team.php">Our Team</a></li>
@@ -986,16 +1165,48 @@ hr {
       <li><a href="news.php">news</a></li>
       <li><a href="contact.php">Contacts</a></li>
 
+      <!-- ✅ MOBILE LOGIN (LIKE OTHER PAGES) -->
+      <li class="mobile-login-wrap">
+        <div class="login-dropdown" id="mobileLoginDropdown">
+          <button class="login-btn" type="button">
+            Login <span class="arrow">▾</span>
+          </button>
+          <ul class="login-menu">
+            <li><a href="https://nersapp.com/s/amfus/auth/">Student Portal</a></li>
+            <li><a href="https://amfuscomprehensivemodelschool.com.ng/admin/admin_login.php">Admin Dashboard</a></li>
+          </ul>
+        </div>
+      </li>
 
       <!-- Mobile Action Buttons -->
       <li class="mobile-actions" style="display:none;">
-        <a class="btn btn-apply" href="/ACMS_PROJECT/Amfus_Admission_Requirements (2).pdf">🎓 Apply</a>
+        <a class="btn btn-apply" href="/Amfus_Admission_Requirements (2).pdf">Apply</a>
       </li>
     </ul>
 
     <!-- Desktop Action Buttons -->
     <div class="action-buttons">
-      <a class="btn btn-apply" href="/ACMS_PROJECT/Amfus_Admission_Requirements (2).pdf">🎓 Apply Now</a>
+      <div class="dropdown">
+        <button class="btn btn-jobs dropdown-toggle" style="font-weight:bold;">
+          Login <span class="arrow">▾</span>
+        </button>
+
+        <ul class="dropdown-menu">
+          <li>
+            <a href="https://nersapp.com/s/amfus/auth/">Student Portal</a>
+          </li>
+          <li>
+            <a href="https://amfuscomprehensivemodelschool.com.ng/admin/admin_login.php">
+              Admin Dashboard
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- APPLY BUTTON (unchanged) -->
+      <a class="btn btn-apply" href="/Amfus_Admission_Requirements (2).pdf">
+        🎓 Apply Now
+      </a>
     </div>
 
     <!-- Hamburger -->
@@ -1007,9 +1218,17 @@ hr {
 (function(){
   const menuToggle = document.getElementById('menuToggle');
   const navLinks = document.getElementById('navLinks');
-  const dropdowns = document.querySelectorAll('.dropdown');
-  const mobileActions = document.querySelectorAll('.mobile-actions');
 
+  // Only the dropdowns inside the mobile menu list (About Us)
+  const dropdowns = document.querySelectorAll('.nav-links .dropdown');
+
+  // Desktop login dropdown id (not present in this file; safe)
+  const loginDropdown = document.getElementById('loginDropdown');
+
+  // ✅ Mobile login dropdown (like other pages)
+  const mobileLoginDropdown = document.getElementById('mobileLoginDropdown');
+
+  const mobileActions = document.querySelectorAll('.mobile-actions');
   const isMobile = () => window.matchMedia('(max-width:920px)').matches;
 
   // Toggle main menu (mobile)
@@ -1018,11 +1237,18 @@ hr {
     const shown = navLinks.classList.toggle('show');
     menuToggle.setAttribute('aria-expanded', shown);
     mobileActions.forEach(el => el.style.display = (shown && isMobile()) ? 'flex' : 'none');
+
+    // close dropdowns if menu toggled on mobile
+    dropdowns.forEach(d => d.classList.remove('open'));
+    if (isMobile() && mobileLoginDropdown) mobileLoginDropdown.classList.remove('open');
+    if (isMobile() && loginDropdown) loginDropdown.classList.remove('open');
   });
 
-  // Dropdown toggle (mobile only)
+  // Dropdown toggle (mobile only) - About Us
   dropdowns.forEach(drop => {
     const btn = drop.querySelector('.dropdown-toggle');
+    if (!btn) return;
+
     btn.addEventListener('click', e => {
       if (!isMobile()) return; // desktop is handled by hover
       e.preventDefault();
@@ -1030,6 +1256,19 @@ hr {
       drop.classList.toggle('open');
     });
   });
+
+  // ✅ Mobile login toggle (mobile only)
+  if (mobileLoginDropdown) {
+    const btn = mobileLoginDropdown.querySelector('.login-btn');
+    if (btn) {
+      btn.addEventListener('click', e => {
+        if (!isMobile()) return;
+        e.preventDefault();
+        e.stopPropagation();
+        mobileLoginDropdown.classList.toggle('open');
+      });
+    }
+  }
 
   // Close menu after clicking a link (mobile)
   navLinks.querySelectorAll('a').forEach(a => {
@@ -1039,6 +1278,8 @@ hr {
         menuToggle.setAttribute('aria-expanded','false');
         mobileActions.forEach(el => el.style.display = 'none');
         dropdowns.forEach(d => d.classList.remove('open'));
+        if (mobileLoginDropdown) mobileLoginDropdown.classList.remove('open');
+        if (loginDropdown) loginDropdown.classList.remove('open');
       }
     });
   });
@@ -1050,16 +1291,20 @@ hr {
       menuToggle.setAttribute('aria-expanded','false');
       mobileActions.forEach(el => el.style.display = 'none');
       dropdowns.forEach(d => d.classList.remove('open'));
+      if (mobileLoginDropdown) mobileLoginDropdown.classList.remove('open');
+      if (loginDropdown) loginDropdown.classList.remove('open');
     }
   });
 
   navLinks.addEventListener('click', e => e.stopPropagation());
+  if (mobileLoginDropdown) mobileLoginDropdown.addEventListener('click', e => e.stopPropagation());
+  if (loginDropdown) loginDropdown.addEventListener('click', e => e.stopPropagation());
 })();
 </script>
 
 <section class="hero">
   <div class="slide active">
-    <img src="/ACMS_PROJECT/IMAGES/schoolview.png" alt="School">
+    <img src="/IMAGES/schoolview.png" alt="School">
      <div class="content">
     <h1>Welcome to Amfus Comprehensive Model School</h1>
 <p>Dedicated to academic excellence and holistic development, Amfus Comprehensive School offers a rich blend of knowledge, creativity, and leadership skills to prepare students for a brighter future.</p>
@@ -1067,7 +1312,7 @@ hr {
   </div>
   </div>
   <div class="slide">
-    <img src="/ACMS_PROJECT/IMAGES/graduation (1).jpg" alt="School 2">
+    <img src="/IMAGES/graduation (1).jpg" alt="School 2">
      <div class="content">
     <h1>Go Online</h1>
       <p>Find everything from Results, Important notices, and Fee Payment on our digital platform.
@@ -1077,10 +1322,10 @@ hr {
   </div>
   </div>
   <div class="slide">
-    <img src="/ACMS_PROJECT/IMAGES/playground.png" alt="Playground">
+    <img src="/IMAGES/playground.png" alt="Playground">
      <div class="content">
     <h1>Welcome to Amfus Comprehensive Model School</h1>
-<p>School motto: knowledge is light.</p>
+<p>School motto: knowledge isÂ light.</p>
     <a href="gallery.php" class="btn-about">Visit Our Gallery</a>
   </div>
   </div>
@@ -1127,7 +1372,7 @@ setInterval(()=>{
       <a href="about.php" class="btn">Discover More</a>
     </div>
     <div class="about-image">
-      <img src="/ACMS_PROJECT/IMAGES/playground.png" alt="About Amfus School">
+      <img src="/IMAGES/playground.png" alt="About Amfus School">
     </div>
   </div>
 </section>
@@ -1143,7 +1388,7 @@ setInterval(()=>{
             <div class="mission-vision-card">
                 <div class="card-icon">🎯</div>
                 <h3>Our Mission</h3>
-                <p>TO EFFECTIVELY IMPLEMENT THE NATIONAL CURRICULUM OF EDUCATION THROUGH DEPLOYMENT OF QUALIFIED TEACHING PERSONNEL AND OTHER RESOURCES IN A CONDUCIVE AND FRIENDLY LEARNING ENVIRONMENT.</p>
+                <p>TO EFFECTIVELY IMPLEMENT THE NATIONAL CURRICULUM OF EDUCATION THROUGH DEPLOYMENT OF QUALIFIED TEACHING PERSONNEL AND OTHER RESOURCES IN A CONDUCIVE AND FRIENDLY LEARNINGÂ ENVIRONMENT.</p>
             </div>
             <div class="mission-vision-card">
                 <div class="card-icon">🌟</div>
@@ -1153,23 +1398,21 @@ setInterval(()=>{
         </div>
     </div>
 </section>
-  <!-- GALLERY SECTION -->
+
+<!-- GALLERY SECTION -->
 <section class="gallery" id="gallery">
   <div class="container">
     <h2 class="section-title">School Gallery</h2>
     <div class="gallery-grid">
-      <div class="gallery-item"><img src="/ACMS_PROJECT/IMAGES/graduation (1).jpg" alt="Campus Grounds"></div>
-      <div class="gallery-item"><img src="/ACMS_PROJECT/IMAGES/excursion 1.webp" alt="Science Laboratory"></div>
-      <div class="gallery-item"><img src="/ACMS_PROJECT/IMAGES/students 6.jpg" alt="Sports Facilities"></div>
-      <div class="gallery-item"><img src="/ACMS_PROJECT/IMAGES/graduation 3.webp" alt="Sports Facilities"></div>
-      <div class="gallery-item"><img src="/ACMS_PROJECT/IMAGES/excursion 3.webp" alt="Sports Facilities"></div>
-      <div class="gallery-item"><img src="/ACMS_PROJECT/IMAGES/student.webp" alt="Sports Facilities"></div>
-      <div class="gallery-item"><img src="/ACMS_PROJECT/IMAGES/graduation (2).jpg" alt="Sports Facilities"></div>
-      <div class="gallery-item"><img src="/ACMS_PROJECT/IMAGES/excursion 2.webp" alt="Sports Facilities"></div>
-
-
-
-      </div>
+      <div class="gallery-item"><img src="/IMAGES/graduation (1).jpg" alt="Campus Grounds"></div>
+      <div class="gallery-item"><img src="/IMAGES/excursion 1.webp" alt="Science Laboratory"></div>
+      <div class="gallery-item"><img src="/IMAGES/students 6.jpg" alt="Sports Facilities"></div>
+      <div class="gallery-item"><img src="/IMAGES/graduation 3.webp" alt="Sports Facilities"></div>
+      <div class="gallery-item"><img src="/IMAGES/excursion 3.webp" alt="Sports Facilities"></div>
+      <div class="gallery-item"><img src="/IMAGES/student.webp" alt="Sports Facilities"></div>
+      <div class="gallery-item"><img src="/IMAGES/graduation (2).jpg" alt="Sports Facilities"></div>
+      <div class="gallery-item"><img src="/IMAGES/excursion 2.webp" alt="Sports Facilities"></div>
+    </div>
   </div>
 </section>
 
@@ -1180,6 +1423,7 @@ setInterval(()=>{
   <img id="lightboxImg" src="" alt="Expanded">
   <span class="next" id="nextBtn">&#10095;</span>
 </div>
+
 <script>
 const galleryItems = document.querySelectorAll('.gallery-item img');
 const lightbox = document.getElementById('lightbox');
@@ -1219,54 +1463,52 @@ lightbox.addEventListener('click', e => {
 });
 </script>
 
-  <!-- TEAM GRID -->
-  <section class="team-section">
-     <h2 class="team-title">Our Team</h2>
-    <div class="team-grid">
-      
-      <div class="team-card">
-        <img src="/ACMS_PROJECT/IMAGES/propertor.png" alt="Principal">
-        <h3>Dr. Sa'adatu Sani Hanga</h3>
-        <p>Proprietress</p>
-        <div class="socials">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-linkedin-in"></i></a>
-        </div>
+<!-- TEAM GRID -->
+<section class="team-section">
+  <h2 class="team-title">Our Team</h2>
+  <div class="team-grid">
+
+    <div class="team-card">
+      <img src="/IMAGES/propertor.png" alt="Principal">
+      <h3>Dr. Sa'adatu Sani Hanga</h3>
+      <p>Proprietress</p>
+      <div class="socials">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
       </div>
-
-
-      <div class="team-card">
-        <img src="/ACMS_PROJECT/IMAGES/sectertary.png" alt="Admissions Officer">
-        <h3>Mr Umar Farouk Yola</h3>
-        <p>Secretary</p>
-        <div class="socials">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-linkedin-in"></i></a>
-        </div>
-      </div>
-
-            <div class="team-card">
-        <img src="/ACMS_PROJECT/IMAGES/vice principal 2.png" alt="Academics Head">
-        <h3>Mr Abubakar Bello</h3>
-        <p>Vice Principal</p>
-        <div class="socials">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-linkedin-in"></i></a>
-        </div>
-      </div>
-
     </div>
 
-     <div class="view-more-container">
+    <div class="team-card">
+      <img src="/IMAGES/sectertary.png" alt="Admissions Officer">
+      <h3>Mr Umar Farouk Yola</h3>
+      <p>Secretary</p>
+      <div class="socials">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <img src="/IMAGES/vice principal 2.png" alt="Academics Head">
+      <h3>Mr Abubakar Bello</h3>
+      <p>Vice Principal</p>
+      <div class="socials">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="view-more-container">
     <a href="team.php" class="view-more-btn">View More</a>
   </div>
-  </section>
+</section>
 
-  <!-- BEAUTIFUL RESPONSIVE FOOTER -->
-<!-- Footer Section -->
+<!-- BEAUTIFUL RESPONSIVE FOOTER -->
 <footer class="footer">
   <div class="footer-container">
     <div class="footer-col">
@@ -1290,10 +1532,10 @@ lightbox.addEventListener('click', e => {
 
     <div class="footer-col">
       <h3>School Hours</h3>
-      <p><strong>Monday - Friday:</strong><br>7:30 AM – 2:00 PM</p>
+      <p><strong>Monday - Friday:</strong><br>7:30 AM â€“ 2:00 PM</p>
       <p><strong>Saturday:</strong><br>Closed</p>
       <p><strong>Sunday:</strong><br>Closed</p>
-      <p><strong>Office Hours:</strong><br>8:00 AM – 4:00 PM (Mon-Fri)</p>
+      <p><strong>Office Hours:</strong><br>8:00 AM â€“ 4:00 PM (Mon-Fri)</p>
     </div>
 
     <div class="footer-col">
@@ -1311,8 +1553,8 @@ lightbox.addEventListener('click', e => {
   <hr>
 
   <div class="footer-bottom">
-    <p>© 2025 Amfus Comprehensive School. All rights reserved. | Quality Education for Future Leaders</p>
-  <a href="https://github.com/AlamiinBabayo">  <p class="designer">Designed by <strong>Al-Amin Babayo </p></a>
+    <p>Â© 2025 Amfus Comprehensive School. All rights reserved. | Quality Education for Future Leaders</p>
+    <a href="https://github.com/AlamiinBabayo"><p class="designer">Designed by <strong>Al-Amin Babayo </strong></p></a>
   </div>
 </footer>
 
@@ -1355,6 +1597,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+<script>
+document.addEventListener('click', function(){
+  document.querySelectorAll('.login-dropdown').forEach(drop=>{
+    drop.classList.remove('open');
+  });
+});
+</script>
 
 </body>
-</html> 
+</html>
